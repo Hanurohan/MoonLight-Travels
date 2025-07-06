@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MOONLIGHT Travels</title>
+  <link rel="stylesheet" href="style.css" />
+  
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="logo">
+  <img src="./Logo.jpg" alt="Logo">
+  <div class="logo-text">
+    <span>Moon Light</span>
+    <div>Travels</div>
+  </div>
+</div>
+
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#book">Book</a></li>
+        <li><a href="#enquire">Enquire</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#travel">Where We Travel</a></li>
+        <li><a href="#help">Help</a></li>
+      </ul>
+    </nav>
+  </header>
+
+<section class="hero">
+  <video autoplay muted loop playsinline class="background-video">
+    <source src="./video.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+<h1 class="slot-machine-title" id="slotTitle"></h1>
+
+  <p>Your dream destination awaits</p>
+  <a href="#book" class="btn-primary">Book Now</a>
+</section>
+
+<section class="content-section" id="book">
+  <div class="book-container">
+    <div class="book-image">
+      <img src="../Project/project1(img).webp" alt="Travel Image" />
+    </div>
+    <div class="book-form-container">
+      <h2 class="form-heading">Book your Dream Destination Now!</h2>
+      <form class="booking-form" id="bookform">
+        <input type="text" name="Place To VIsit" id="Place To Visit" placeholder="Place To VIsit" required>
+        <input type="email" name="email" id="email" placeholder="Your Email" required>
+        <input type="date" name="date" id="date" required>
+        <textarea name="message" placeholder="Your Message" id="yourmessage" required></textarea>
+        <button type="submit" class="btn-book">Submit</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="content-section enquire-section" id="enquire">
+  <div class="enquire-section">
+    <div class="enquire-form-wrapper">
+      <h3>Enquire Now!</h3>
+      <form class="enquire-form" id="enquire-form">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <input type="tel" name="phone" placeholder="Your Phone Number" required>
+        <textarea name="message" placeholder="Type your enquiry here..." required></textarea>
+        <button type="submit" class="btn-enquire">Send Enquiry</button>
+      </form>
+    </div>
+    <div class="enquire-image">
+      <img src="../Project/Infosys.webp" alt="Enquire Image" />
+    </div>
+  </div>
+</section>
+
+
+<section id="experience" class="content-section">
+    <h2 id="experience-heading">Share Your Experience</h2>
+    <textarea placeholder="Leave feedback here..."></textarea>
+    <button>Submit Feedback</button>
+</section>
+
+<section class="travel-section" id="where-we-travel">
+  <div class="map-container">
+    <img src="./Map.jpg" alt="Travel Map">
+  </div>
+  <div class="destinations-container">
+    <h2>Where We Travel</h2>
+    <ul class="destinations-list">
+      <li>Ooty</li>
+      <li>Munnar</li>
+      <li>Coorg</li>
+      <li>Kanyakumari</li>
+      <li>Allepy</li>
+      <li>Vagamon</li>
+    </ul>
+  </div>
+</section>
+
+
+<section class="help-section" id="help-support">
+  <h2>Help & Support</h2>
+  <div class="help-cards">
+    <div class="help-card">
+      <h3>Customer Service</h3>
+      <p>Reach out to our support team for booking, cancellations, and queries.</p>
+      <a href="mailto:support@yourdomain.com" class="btn-help">Email Us</a>
+    </div>
+    <div class="help-card">
+      <h3>FAQs</h3>
+      <p>Find answers to the most commonly asked questions.</p>
+      <a href="#faq" class="btn-help">View FAQs</a>
+    </div>
+    <div class="help-card">
+      <h3>Live Chat</h3>
+      <p>Chat with our support agents 24/7 for immediate assistance.</p>
+      <a href="#live-chat" class="btn-help">Start Chat</a>
+    </div>
+  </div>
+</section>
+
+
+  <footer>
+    <p>&copy; 2025 Moonlight Travels. All rights reserved.</p>
+  </footer>
+  
+</body>
+<script>
+ document.addEventListener("DOMContentLoaded", () => {
+    const targetText = "MOONLIGHT TRAVELS";
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const spinCount = 10;
+    const letterHeight = 48; // matches 3rem in CSS
+    const slotTitle = document.getElementById("slotTitle");
+
+    [...targetText].forEach((char, i) => {
+      if (char === " ") {
+        const space = document.createElement("div");
+        space.style.width = "1.5rem";
+        slotTitle.appendChild(space);
+        return;
+      }
+
+      const letterContainer = document.createElement("div");
+      letterContainer.className = "slot-letter";
+
+      const stack = document.createElement("div");
+      stack.className = "letter-stack";
+
+      for (let j = 0; j < spinCount; j++) {
+        const temp = document.createElement("div");
+        temp.textContent = characters.charAt(Math.floor(Math.random() * characters.length));
+        stack.appendChild(temp);
+      }
+
+      const finalCharDiv = document.createElement("div");
+      finalCharDiv.textContent = char;
+      stack.appendChild(finalCharDiv);
+
+      letterContainer.appendChild(stack);
+      slotTitle.appendChild(letterContainer);
+
+      // Trigger animation
+      setTimeout(() => {
+        stack.style.transform = `translateY(-${letterHeight * spinCount}px)`;
+      }, i * 150);
+
+      // Remove all previous letters after animation
+      setTimeout(() => {
+        stack.innerHTML = `<div>${char}</div>`;
+        stack.style.transform = "translateY(0)";
+      }, (i + 1) * 150 + 1000); // delay cleanup after scroll
+    });
+  });
+</script>
+<script>
+  const experienceHeading = document.querySelector("#experience h2");
+
+  window.addEventListener("scroll", () => {
+    const section = document.querySelector("#experience");
+    const rect = section.getBoundingClientRect();
+
+    // Distance from top of viewport
+    const offset = rect.top;
+    const windowHeight = window.innerHeight;
+
+    if (offset < windowHeight && offset > -rect.height) {
+      const progress = 1 - offset / windowHeight;
+
+      // Animate heading based on scroll progress
+      experienceHeading.style.opacity = Math.min(progress * 1.5, 1);
+      experienceHeading.style.transform = `translateY(${(1 - progress) * 60}px) scale(${0.95 + progress * 0.05})`;
+    }
+  });
+</script>
+
+<script>
+  document.querySelectorAll('.btn-book').forEach(button => {
+    button.addEventListener('click', function (e) {
+      const ripple = document.createElement('span');
+      ripple.classList.add('ripple');
+      this.appendChild(ripple);
+
+      const rect = this.getBoundingClientRect();
+      ripple.style.left = `${e.clientX - rect.left}px`;
+      ripple.style.top = `${e.clientY - rect.top}px`;
+
+      setTimeout(() => ripple.remove(), 600);
+    });
+  });
+</script>
+
+<script>
+// ENQUIRE FORM
+const enquireForm = document.querySelector('.enquire-form');
+if (enquireForm) {
+  enquireForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = {
+      name: enquireForm.name.value,
+      email: enquireForm.email.value,
+      phone: enquireForm.phone.value,
+      message: enquireForm.message.value,
+    };
+    push(ref(database, 'enquiries/'), data)
+      .then(() => alert("Enquiry sent!"))
+      .catch(err => alert("Error: " + err.message));
+  });
+}
+</script>
+<script>
+// EXPERIENCE FORM
+const experienceForm = document.querySelector('#experience');
+const experienceTextarea = experienceForm?.querySelector('textarea');
+const experienceBtn = experienceForm?.querySelector('button');
+
+if (experienceForm && experienceTextarea && experienceBtn) {
+  experienceBtn.addEventListener('click', () => {
+    const feedback = experienceTextarea.value.trim();
+    if (feedback) {
+      push(ref(database, 'feedback/'), { feedback })
+        .then(() => {
+          alert("Thanks for your feedback!");
+          experienceTextarea.value = "";
+        })
+        .catch(err => alert("Error: " + err.message));
+    }
+  });
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+<script>
+  
+ const firebaseConfig = {
+  apiKey: "AIzaSyBJsfP8SbODdP41sv5-GzTPw5DyR8KxcYM",
+  authDomain: "moonlighttravels-6ab73.firebaseapp.com",
+  databaseURL: "https://moonlighttravels-6ab73-default-rtdb.firebaseio.com",
+  projectId: "moonlighttravels-6ab73",
+  storageBucket: "moonlighttravels-6ab73.firebasestorage.app",
+  messagingSenderId: "748516033937",
+  appId: "1:748516033937:web:4fa000f4b3ac7606004630",
+  measurementId: "G-R1VQSQ0HCF"
+};
+firebase.initializeApp(firebaseConfig);
+var bookformDB = firebase.database().ref('bookform');
+document.getElementById('bookform').addEventListener('submit',submitForm);
+function submitForm(e){
+    e.preventdefault();
+
+    var place_to_visit = getElementval('Place To Visit');
+    var email = getElementval('email');
+    var date= getElementval('date');
+    var message = getElementval('yourmessage');
+    
+    console.log(place_to_visit,email,date,message);
+};
+
+const getElementval = (id)=>{
+    return document.getElementById(id).value;
+};
+</script>
+
+</html>
